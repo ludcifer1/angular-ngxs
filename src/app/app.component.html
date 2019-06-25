@@ -1,2 +1,24 @@
-<app-create></app-create>
-<app-read></app-read>
+<div class="container" *ngIf="state$ | async as state">
+  <div class="row">
+    <h1>
+      <span class="badge badge-primary">
+        NGXS
+      </span>
+      Salad
+    </h1>
+  </div>
+  <div>
+    <p>Order ID: <span class="badge badge-success">{{ state.app.orderId }}</span></p>
+    <p>Username: <span class="badge badge-success">{{ state.app.username }}</span></p>
+  </div>
+  <hr>
+  <div class="row" *ngIf="!state.app.username">
+    <div>
+      <input class="form-control" type="text" placeholder="Enter your name" [(ngModel)]="username">
+      <button class="btn btn-outline-success" [disabled]="!username" (click)="clickHandler(state)"> Name for this
+        order</button>
+    </div>
+  </div>
+  <hr>
+  <router-outlet></router-outlet>
+</div>

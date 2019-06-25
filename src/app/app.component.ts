@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { AppState } from './shared/state/app.state';
+import { Store, Select } from '@ngxs/store';
+import { SetUserName } from './shared/actions/app.actions';
+import { Navigate } from './shared/state/router.state';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +11,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'angular-ngxs';
+  state$: Observable<AppState>;
+  // @Select(state => state.app) app$;
+
+  constructor(private store: Store) {
+    this.state$ = this.store.select(state => state);
+  }
+
+  clickHandler(username) {
+    this.store.dispatch([
+      new SetUserName(username),
+      new Navigate('salad/order')
+    ]);
+  }
+
 }

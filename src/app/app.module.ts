@@ -2,20 +2,24 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { ReadComponent } from './read/read.component';
-import { CreateComponent } from './create/create.component';
+import { FormsModule } from '@angular/forms';
 
 import { NgxsModule } from '@ngxs/store';
-import { BaseModelState } from './state/basemodel.state';
 // OPT
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+import { AppRoutingModule } from './app-routing.module';
+import { AppState } from './shared/state/app.state';
+import { RouterState } from './shared/state/router.state';
 
 @NgModule({
-  declarations: [AppComponent, ReadComponent, CreateComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
-    NgxsModule.forRoot([BaseModelState]),
+    AppRoutingModule,
+    FormsModule,
+    // NGXS
+    NgxsModule.forRoot([RouterState, AppState]),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot()
   ],
