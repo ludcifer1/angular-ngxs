@@ -19,10 +19,10 @@ export class AppComponent {
   }
 
   clickHandler(username) {
+    console.log(username);
     this.store.dispatch([
       new SetUserName(username),
       new Navigate('salad/order')
     ]);
   }
-
 }

@@ -14,13 +14,13 @@ export class Navigate {
 export class RouterState {
   // Awesome feature of NGXS ==> Directly inject angular's service
   constructor(private router: Router) {}
-
   @Action(Navigate)
   async changeRoute(context: StateContext<string>, action: Navigate) {
     const path = action.payload;
     await this.router.navigate([path]);
     context.setState(path);
   }
+
 }
 // Listen to Event stream
 @Injectable()

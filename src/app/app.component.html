@@ -15,10 +15,11 @@
   <div class="row" *ngIf="!state.app.username">
     <div>
       <input class="form-control" type="text" placeholder="Enter your name" [(ngModel)]="username">
-      <button class="btn btn-outline-success" [disabled]="!username" (click)="clickHandler(state)"> Name for this
+      <button class="btn btn-outline-success" [disabled]="!username" (click)="clickHandler(username)"> Name
+        for this
         order</button>
     </div>
   </div>
-  <hr>
+  <br>
   <router-outlet></router-outlet>
 </div>
