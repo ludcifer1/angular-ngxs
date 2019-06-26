@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppState } from './shared/state/app.state';
 import { RouterState } from './shared/state/router.state';
 import { OrderService } from './shared/services/order.service';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +20,8 @@ import { OrderService } from './shared/services/order.service';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    //
+    MatButtonModule,
     // NGXS
     NgxsModule.forRoot([RouterState, AppState]),
     NgxsReduxDevtoolsPluginModule.forRoot(),
