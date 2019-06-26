@@ -12,7 +12,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppState } from './shared/state/app.state';
 import { RouterState } from './shared/state/router.state';
 import { OrderService } from './shared/services/order.service';
-import { MatButtonModule } from '@angular/material/button';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,10 +22,12 @@ import { MatButtonModule } from '@angular/material/button';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    BrowserAnimationsModule,
+
     //
-    MatButtonModule,
     // NGXS
     NgxsModule.forRoot([RouterState, AppState]),
+
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot()
   ],

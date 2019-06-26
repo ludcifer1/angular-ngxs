@@ -11,5 +11,16 @@ import { Navigate } from './shared/state/router.state';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(private store: Store) {}
+  state$: Observable<AppState>;
+
+  constructor(private store: Store) {
+    this.state$ = this.store.select(state => state);
+  }
+
+  clickHandler(username) {
+    this.store.dispatch([
+      new SetUserName(username),
+      new Navigate('data/table')
+    ]);
+  }
 }

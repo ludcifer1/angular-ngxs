@@ -10,7 +10,7 @@ import { tap } from 'rxjs/operators';
 
 export interface AppStateModel {
   username: string;
-  orderId: number;
+  userId: number;
   status?: 'pending' | 'confirmed' | 'declined';
 }
 
@@ -18,7 +18,7 @@ export interface AppStateModel {
   name: 'app',
   defaults: {
     username: '',
-    orderId: Math.floor(Math.random() * 2300)
+    userId: Math.floor(Math.random() * 2300)
   }
 })
 export class AppState {
@@ -32,24 +32,4 @@ export class AppState {
     patchState({ username: payload });
   }
 
-  @Action(ConfirmOrder, { cancelUncompleted: true })
-  confirm({ dispatch, patchState }: StateContext<AppStateModel>) {
-    patchState({ status: 'pending' });
-    return this.orderService
-      .post()
-      .pipe(
-        tap(success =>
-          success ? dispatch(OrderSuccess) : dispatch(OrderFailed)
-        )
-      );
-  }
-  @Action(OrderSuccess)
-  orderSuccess({ patchState }: StateContext<AppStateModel>) {
-    patchState({ status: 'confirmed' });
-  }
-
-  @Action(OrderFailed)
-  orderFailed({ patchState }: StateContext<AppStateModel>) {
-    patchState({ status: 'declined' });
-  }
 }
