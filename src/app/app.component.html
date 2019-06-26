@@ -22,5 +22,23 @@
   </div>
   <br>
   <router-outlet></router-outlet>
-</div>
+  <button *ngIf="state.app.username" class="btn btn-outline-dark btn-block loading" (click)="confirm()">Confirm
+    Order</button>
 
+
+  <div [ngSwitch]="state.app.status">
+
+    <div *ngSwitchCase="'pending'" class="alert alert-primary">
+      Confirming order....
+    </div>
+
+    <div *ngSwitchCase="'confirmed'" class="alert alert-success">
+      Success!
+    </div>
+
+    <div *ngSwitchCase="'declined'" class="alert alert-danger">
+      Declined :(
+    </div>
+
+  </div>
+</div>
