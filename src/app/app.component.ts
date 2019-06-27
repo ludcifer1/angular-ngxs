@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AppState } from './shared/state/app.state';
 import { Store, Select } from '@ngxs/store';
-import { SetUserName, ConfirmOrder } from './shared/actions/app.actions';
 import { Navigate } from './shared/state/router.state';
+import { GetOrderList } from './shared/actions/app.actions';
+import { App, OrderModel } from './shared/models/app.interface';
 
 @Component({
   selector: 'app-root',
@@ -11,16 +12,18 @@ import { Navigate } from './shared/state/router.state';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  state$: Observable<AppState>;
+  @Select(AppState.orderList) orders$: Observable<OrderModel>;
+  dataSource = [];
 
-  constructor(private store: Store) {
-    this.state$ = this.store.select(state => state);
-  }
+  constructor(private store: Store) {}
 
-  clickHandler(username) {
-    this.store.dispatch([
-      new SetUserName(username),
-      new Navigate('data/table')
-    ]);
+  ngOnInit(): void {
+    const isListPopulated = this.store.selectSnapshot<App>(
+      x => x.app.orderList.length
+    );
+    if (!isListPopulated) {
+      console.log('>>> Nodata so fetch');
+      this.store.dispatch(new GetOrderList());
+    }
   }
 }

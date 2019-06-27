@@ -15,6 +15,9 @@ import { OrderService } from './shared/services/order.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { FakeDataService } from './shared/server/fakeDb.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,7 +26,10 @@ import { MatTableModule } from '@angular/material/table';
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
-
+    HttpClientModule,
+    HttpClientInMemoryWebApiModule.forRoot(FakeDataService, {
+      dataEncapsulation: false
+    }),
     //
     // NGXS
     NgxsModule.forRoot([RouterState, AppState]),

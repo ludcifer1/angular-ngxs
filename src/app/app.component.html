@@ -1,27 +1,11 @@
-<div class="container" *ngIf="state$ | async as state">
-  <div class="row">
-    <h1>
-      <span class="badge badge-primary">
-        NGXS
-      </span>
-      Data Table Example
-    </h1>
-  </div>
-
-  <div>
-    <p>User ID: <span class="badge badge-success">{{ state.app.userId }}</span></p>
-    <p>Username: <span class="badge badge-success">{{ state.app.username }}</span></p>
-  </div>
-  <hr>
-
-  <div class="row" *ngIf="!state.app.username">
-    <div>
-      <input class="form-control" type="text" placeholder="Enter your name" [(ngModel)]="username">
-      <button class="btn btn-outline-success" [disabled]="!username" (click)="clickHandler(username)"> Set User Name
-      </button>
-    </div>
-  </div>
-  <br>
-
-  <router-outlet></router-outlet>
+<div class="container bg-dark text-light">
+  <h3 class= "">
+    List Order
+  </h3>
+  <ul>
+    <li *ngFor="let order of (orders$|async)">
+      <h4>{{order.name}}</h4>
+    </li>
+    {{orders|json}}
+  </ul>
 </div>
