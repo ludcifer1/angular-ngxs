@@ -1,3 +1,7 @@
+export class ClearState{
+  static readonly type = '[product] clear product state';
+  constructor() { }
+}
 export class LoadToState {
   static readonly type = '[product] load product to';
   constructor(public payload: any) {}

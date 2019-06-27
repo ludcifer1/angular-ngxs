@@ -5,7 +5,8 @@ import { ProductService } from '../services/product.service';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { ProductState } from '../products.state';
-import { CreateProduct, LoadToState } from '../products.actions';
+import { LoadToState, ClearState } from '../products.actions';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-data-list',
@@ -29,15 +30,39 @@ export class DataListComponent implements OnInit {
   }
 
   addProduct() {
-    const dialogRef = this.dialog.open(DataFormComponent, {
-      width: '800px'
-    });
+    const dialogRef = this.dialog
+      .open(DataFormComponent, {
+        width: '800px'
+      })
+      .afterClosed()
+      .pipe(
+        tap(res => {
+          this.resetState();
+        })
+      )
+      .subscribe();
   }
+
   getProduct(product: any) {
-    console.log('product selected ', product);
     this.store.dispatch([new LoadToState(product)]);
-    const dialogRef = this.dialog.open(DataFormComponent, {
-      width: '800px'
-    });
+    const dialogRef = this.dialog
+      .open(DataFormComponent, {
+        width: '800px'
+      })
+      .afterClosed()
+      .pipe(
+        tap(res => {
+          this.resetState();
+        })
+      )
+      .subscribe();
+  }
+  resetState() {
+    this.store.dispatch(new ClearState());
+  }
+  fetchProduct() {
+    this.productService
+      .getAllProduct()
+      .subscribe(res => (this.dataSource = res));
   }
 }

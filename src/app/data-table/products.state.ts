@@ -1,19 +1,26 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { Product, ProductList } from './products.model';
-import { LoadToState, AddSupplier, RemoveSupplier } from './products.actions';
+import {
+  LoadToState,
+  AddSupplier,
+  RemoveSupplier,
+  ClearState
+} from './products.actions';
 import { ProductService } from './services/product.service';
 import { tap } from 'rxjs/operators';
 
+const defaults: Product = {
+  id: -1,
+  name: '',
+  code: '',
+  price: 0,
+  description: '',
+  suppliers: []
+};
+
 @State<Product>({
   name: 'product',
-  defaults: {
-    id: -1,
-    name: '',
-    code: '',
-    price: 0,
-    description: '',
-    suppliers: [],
-  }
+  defaults
 })
 export class ProductState {
   constructor(private productService: ProductService) {}
@@ -64,5 +71,9 @@ export class ProductState {
     patchState({
       suppliers: getState().suppliers.filter(supplier => supplier !== payload)
     });
+  }
+  @Action(ClearState)
+  reset({ setState }: StateContext<Product>) {
+    setState({ ...defaults });
   }
 }

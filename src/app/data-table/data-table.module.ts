@@ -15,6 +15,7 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './server/in-memory-data.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductService } from './services/product.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [{ path: 'table', component: DataListComponent }];
 
@@ -22,6 +23,8 @@ const routes: Routes = [{ path: 'table', component: DataListComponent }];
   imports: [
     CommonModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
     // Remove it when a real server is ready to receive requests.

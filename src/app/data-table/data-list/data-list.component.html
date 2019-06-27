@@ -1,5 +1,6 @@
 <div class="mb-3">
   <button class="btn btn-primary" (click)="addProduct()">Add Product </button>
+  <button class="btn btn-primary" (click)="fetchProduct()">Fetch Product </button>
 </div>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   <ng-container matColumnDef="id">
