@@ -1,36 +1,33 @@
 import { Store, Action, StateContext, State, Selector } from '@ngxs/store';
 
-import { OrderService } from '../services/order.service';
+import { OrderService } from '../../modules/orders/shared/services/order.service';
 import { tap } from 'rxjs/operators';
 import { App } from './../models/app.interface';
-import { GetOrderList, GetOrder } from '../actions/app.actions';
+import { GetOrder, SetUser } from '../actions/app.actions';
 
-export const getAppInitState = (): App => ({
-  orderList: []
+export const getAppInitState = (): any => ({
+  id: null
 });
 
-@State<App>({
-  name: 'app',
+export interface User {
+  id: string;
+  password: string;
+}
+
+@State<User>({
+  name: 'user',
   defaults: getAppInitState()
 })
 export class AppState {
   constructor(private orderService: OrderService) {}
 
   @Selector()
-  static orderList(state: App) {
-    return state.orderList;
+  static userID(state: User) {
+    return state.id;
   }
 
-  @Action(GetOrderList)
-  async getOrderList(context: StateContext<App>, action: GetOrderList) {
-    try {
-      const orderList = await this.orderService.getAllOrders().toPromise();
-      const state = context.getState();
-
-      context.setState({
-        ...state,
-        orderList
-      });
-    } catch {}
+  @Action(SetUser)
+  setUser({ patchState }: StateContext<User>, { payload }: SetUser) {
+    patchState({ id: payload });
   }
 }

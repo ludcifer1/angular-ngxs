@@ -25,6 +25,7 @@ export class FakeDataService implements InMemoryDbService {
     ];
     const orders = [
       {
+        id: 1,
         name: 'Order 1',
         code: 'ORD1',
         value: 200000,
@@ -36,6 +37,7 @@ export class FakeDataService implements InMemoryDbService {
         ]
       },
       {
+        id: 2,
         name: 'Order 2',
         code: 'ORD2',
         value: 150000,
@@ -51,6 +53,7 @@ export class FakeDataService implements InMemoryDbService {
         ]
       },
       {
+        id: 3,
         name: 'Order 3',
         code: 'ORD3',
         value: 200000,
@@ -70,6 +73,7 @@ export class FakeDataService implements InMemoryDbService {
         ]
       },
       {
+        id: 4,
         name: 'Order 4',
         code: 'ORD4',
         value: 200000,
@@ -85,6 +89,7 @@ export class FakeDataService implements InMemoryDbService {
         ]
       },
       {
+        id: 5,
         name: 'Order 5',
         code: 'ORD5',
         value: 1400000,

@@ -1,11 +1,39 @@
 <div class="container bg-dark text-light">
-  <h3 class= "">
-    List Order
+  <h1 class="mb-3">
+    <span class="badge badge-info">
+      NGXS
+    </span>
+    Demo
+  </h1>
+  <h3 *ngIf="currentId">
+    <span class="badge badge-light mr-3">User ID: </span>{{currentId}}
   </h3>
-  <ul>
-    <li *ngFor="let order of (orders$|async)">
-      <h4>{{order.name}}</h4>
-    </li>
-    {{orders|json}}
-  </ul>
+  <div *ngIf="!currentId">
+    <h2 class="row d-flex justify-content-center ">Login</h2>
+    <div class="d-flex flex-column align-items-center">
+      <div class="row w-75">
+        <div class="col-2">ID:</div>
+        <div class="col-10">
+          <input type="text" class="form-control" #id />
+        </div>
+      </div>
+      <div class="row w-75 ">
+        <div class="col-2">Password:</div>
+        <div class="col-10">
+          <input type="password" class="form-control" #password />
+        </div>
+      </div>
+    </div>
+
+    <div class="row d-flex justify-content-center p-4">
+      <button class="btn btn-primary w-25" (click)="login(id, password)">
+        Login
+      </button>
+      <button class="btn btn-secondary w-25 ml-3">
+        Cancel
+      </button>
+    </div>
+  </div>
+  {{userId}}
+  <router-outlet></router-outlet>
 </div>

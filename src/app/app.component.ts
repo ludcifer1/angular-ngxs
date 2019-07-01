@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
-import { AppState } from './shared/state/app.state';
 import { Store, Select } from '@ngxs/store';
 import { Navigate } from './shared/state/router.state';
-import { GetOrderList } from './shared/actions/app.actions';
-import { App, OrderModel } from './shared/models/app.interface';
+import { SetUser } from './shared/actions/app.actions';
+import { AppState } from './shared/state/app.state';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -12,18 +11,16 @@ import { App, OrderModel } from './shared/models/app.interface';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  @Select(AppState.orderList) orders$: Observable<OrderModel>;
-  dataSource = [];
+  @Select(AppState.userID) userId$: Observable<any>;
+  currentId = null;
 
-  constructor(private store: Store) {}
+  constructor(private store: Store) {
+    this.userId$.subscribe(res => (this.currentId = res));
+  }
 
-  ngOnInit(): void {
-    const isListPopulated = this.store.selectSnapshot<App>(
-      x => x.app.orderList.length
-    );
-    if (!isListPopulated) {
-      console.log('>>> Nodata so fetch');
-      this.store.dispatch(new GetOrderList());
-    }
+  ngOnInit(): void {}
+
+  login(id: any, password: any) {
+    this.store.dispatch([new SetUser(id.value), new Navigate('orders/list')]);
   }
 }

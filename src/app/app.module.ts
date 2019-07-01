@@ -11,12 +11,12 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { AppRoutingModule } from './app-routing.module';
 import { AppState } from './shared/state/app.state';
 import { RouterState } from './shared/state/router.state';
-import { OrderService } from './shared/services/order.service';
+import { OrderService } from './modules/orders/shared/services/order.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { FakeDataService } from './shared/server/fakeDb.service';
+import { FakeDataService } from './modules/orders/shared/_server/fakeDb.service';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({

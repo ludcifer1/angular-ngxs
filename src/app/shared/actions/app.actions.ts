@@ -1,11 +1,6 @@
-
-export class GetOrderList {
-  static readonly type = '[ORDERS API] Get Orders List';
-  constructor() {}
-}
-export class GetOrderListFail {
-  static readonly type = '[ORDERS API] Get Orders List fail';
-  constructor() {}
+export class SetUser {
+  static readonly type = '[APP] Set User Id to State';
+  constructor(public payload: string) {}
 }
 export class GetOrder {
   static readonly type = '[ORDER SERVICE] Get one Order';
