@@ -4,14 +4,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '',
-    component: AppComponent
-  },
-  {
-    path: '**',
-    component: AppComponent
+    path: 'orders',
+    loadChildren: () =>
+      import('./modules/orders/orders.module').then(m => m.OrdersModule)
   }
 ];
+
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
